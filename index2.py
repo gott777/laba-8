@@ -1,33 +1,40 @@
-num = int(input())
+
+
+num = int(input("Введите число: "))
+
 def reverse_number(num):
-    num = str(num)
-    return num[::-1]
-print(reverse_number(num))
+    string = str(num)
+    reversed_string = string[::-1]
+    return int(reversed_string)
 
-
-num2 = int(input())
-def is_palindrome(num2):
-    num2reverse = str(num2)
-    num2reverse = num2reverse[::-1]
-    num2 = str(num2)
-    if num2reverse==num2:
-        return 'число является полиндромом'
+def is_polindrom(num):
+    s = str(num)
+    if s == s[::-1]:
+        return True
     else:
-        return 'число не является полиндромом'
-print(is_palindrome(num2))
+        return False
+    
+reversed_num = reverse_number(num)
+
+def reverse_number(n):
+    reversed_str = str(n)[::-1]
+    if reversed_str == str(n):
+        print(f"{n} полидром")
+    return int(reversed_str)
 
 def process_numbers(numbers):
     reversed_numbers = []
     for num in numbers:
-        num_str = str(num)
-        reversed_num_str = num_str[::-1]
-        reversed_num = int(reversed_num_str)
-        if num == reversed_num:
-            print(f"{num} является палиндромом")
-        reversed_numbers.append(reversed_num)
+        reversed_numbers.append(reverse_number(num))
     return reversed_numbers
 
-# Пример использования
-numbers = [123, 456, 121, 1331,11]
-reversed_numbers = process_numbers(numbers)
-print("Перевернутые числа:", reversed_numbers)
+numbers = [123, 456, 789, 121, 343, 555]
+result = process_numbers(numbers)
+print("Reversed numbers:", result)
+
+print("Перевернутое число:", reversed_num)
+
+if is_polindrom(num):
+    print('Число полиндром')
+else:
+    print("Число не полиндром")
