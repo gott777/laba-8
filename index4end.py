@@ -1,36 +1,76 @@
+from colorama import init
 import random
+init()
+from colorama import Fore, Back
 
-def generate_doors(num_doors, num_prizes):
-    doors = ["пусто"] * num_doors
-    prize_indices = random.sample(range(num_doors), num_prizes)
-    for idx in prize_indices:
-        doors[idx] = "приз"
-    return doors
 
-def simulate_game(num_doors, num_prizes):
-    doors = generate_doors(num_doors, num_prizes)
-    player_choice = random.randint(0, num_doors - 1)
-    # Открываем одну из дверей, за которой нет приза
-    revealed_door = random.choice([idx for idx in range(num_doors) if idx != player_choice and doors[idx] == "пусто"])
-    # Игрок решает изменить выбор
-    player_choice_new = random.choice([idx for idx in range(num_doors) if idx != player_choice and idx != revealed_door])
-    # Возвращаем результаты: True, если игрок выиграл, иначе False
-    return doors[player_choice_new] == "приз", doors[player_choice] == "приз"
 
-# Пример использования
-num_doors = 3
-num_prizes = 1
-num_simulations = 10000
+numbers = [1, 2, 3, 4]
+probabilities = [0.7, 0.2, 0.1, 0.05]
+selected_number = random.choices(numbers, weights=probabilities)[0]
 
-switch_wins = 0
-stay_wins = 0
-for _ in range(num_simulations):
-    switch_win, stay_win = simulate_game(num_doors, num_prizes)
-    if switch_win:
-        switch_wins += 1
-    if stay_win:
-        stay_wins += 1
 
-switch_win_probability = switch_wins / num_simulations
-stay_win_probability = stay_wins / num_simulations
+
+uncomone = ['G3SG1 | песчянная буря', 'Nova | Сердечник', 'AUG | Гроза', 'SSG | Голубая хвоя', 'Галиль | Белое напыление']
+rare = ['Sawed-Off | Spirit Board', 'Негев | Drop me', 'Mp5-SD | Ликвидация', 'MAC-10 | Заточение', 'SG 553 | Алоха']
+epic = ['Рефольвер | Янтарный Шрадиент', 'Tec-9 | Удаленный лоступ', 'FAMAS | Быстрое движение', 'Dual Berettas | Турбодвойники', 'MP7 | Дух бездны']
+legendary = ['AWP | Dragon lore', 'M4A4 | Вой', 'Тычковые ножи | африканская сетка', 'Штык-Нож | Водны', 'Нож-бабочка | Волны']
+
+
+uncomone_int = 0
+rare_int = 0
+epic_int = 0 
+legendary_int = 0
+for i in range(20):
+    numbers = [1, 2, 3, 4]
+    probabilities = [0.7, 0.2, 0.1, 0.05]
+    selected_number = random.choices(numbers, weights=probabilities)[0]
+    def random_list():
+        if selected_number == 1:
+            uncomone_random = random.choice(uncomone)
+            print(Fore.WHITE + uncomone_random)
+            print(' ')
+        elif selected_number == 2:
+            rare_random = random.choice(rare)
+            print(Fore.BLUE + rare_random)
+            print(' ')
+        elif selected_number == 3:
+            epic_random = random.choice(epic)
+            print(Fore.MAGENTA + epic_random)
+            print(' ')
+        else:
+            legendary_random = random.choice(legendary)
+            print(Fore.YELLOW + legendary_random)
+            print(' ')
+
+    def schetchik():
+        global uncomone_int, rare_int, epic_int, legendary_int
+        if selected_number == 1:
+            uncomone_int += 1
+        elif selected_number == 2:
+            rare_int += 1
+        elif selected_number == 3:
+            epic_int += 1
+        else:
+            legendary_int += 1
+    random_list()
+    schetchik()
+
+
+if epic_int >= 3:
+    print(Back.MAGENTA + "Удача!")
+    print(' ')
+elif legendary_int >= 1:
+    print(Back.YELLOW + "Большая удача!")
+    print(' ')
+else:
+    print(Back.WHITE + 'не повезло :(')
+    print(' ')
+
+print(Fore.WHITE + "Обычный: ", uncomone_int)
+print(Fore.BLUE + "Редкое: ", rare_int)
+print(Fore.MAGENTA + "Эпическое: ", epic_int)
+print(Fore.YELLOW + "Легендарное: ", legendary_int)
+
+
 
